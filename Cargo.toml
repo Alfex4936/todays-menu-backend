@@ -20,6 +20,8 @@ tera = "1.16.0"  # 웹 홈페이지 tera template
 rust-embed="6.4.0"
 mime_guess = { version = "2" }
 
+lazy_static = "1.4.0"
+
 actix-web-static-files = "4.0"
 static-files = "0.2.1"
 

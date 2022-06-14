@@ -4,16 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>리뷰 작성</title>
-    <link rel="stylesheet" href="css/review.css" />
+    <link rel="stylesheet" href="/css/review.css" />
   </head>
   <body>
     <div class="wrap">
-      <h1>후기</h1>
-      
-
-      <form name="reviewform" class="reviewform" method="post" action="/save">
+      <h1>{{ food_name }} 후기</h1>
+      <form name="reviewform" class="reviewform" method="post" action="/review_save">
         <input type="hidden" name="rate" id="rate" value="0" />
-        <p class="title_star">메뉴 이름</p>
+        <p class="title_star">{{ name }}님, 멋진 리뷰를 남겨주세요!</p>
         <div class="review_rating rating_point">
           <div class="warning_msg">별점을 선택해 주세요.</div>
           <div class="rating">
@@ -33,16 +31,16 @@
             <!-- 1부터 10점 (별 3.5개면 7) -->
         </div>
         <div class="review_contents">
-          <div class="warning_msg">5자 이상의 리뷰 내용을 작성해 주세요.</div>
-          <textarea rows="10" class="review_textarea"></textarea>
+          <!-- <div class="warning_msg">5자 이상의 리뷰 내용을 작성해 주세요.</div> -->
+          <textarea name="review_txt" spellcheck="false" maxlength="100" minlength="5" rows="10" class="review_textarea" required></textarea>
+          <input name="food" value="{{ food_name }}" type="hidden"/>
         </div>
         <div class="cmd">
-          <input type="button" name="save" id="save" value="등록" />
+          <input type="submit" name="save" id="save" value="등록" />
         </div>
       </form>
     </div>
-    <script src="js/jquery.slim.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.4/jquery.rateyo.min.js"></script>
-    <script src="js/review.js"></script>
+    <script src="/js/review.js"></script>
   </body>
 </html>
