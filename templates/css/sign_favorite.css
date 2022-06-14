@@ -1,0 +1,47 @@
+.container {
+  width: 80%;
+  height: 1000px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 5px solid rgb(211, 211, 211);
+  border-radius: 5px;
+}
+
+#login {
+  width: 70%;
+  background-color: skyblue;
+  border-color: transparent;
+  color: white;
+}
+
+.account {
+  display: block;
+  margin-bottom: 15px;
+  padding: 3px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+#name {
+  margin-top: 15px;
+}
+#alert {
+  border-color: transparent;
+}
+
+#href_a {
+  text-decoration: none;
+  color: white;
+}
+
+.client_enroll {
+  background-color: rgb(50, 177, 205);
+
+  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 10px;
+}

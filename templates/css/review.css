@@ -1,0 +1,40 @@
+html,
+body {
+  background-color: #f0e8d9;
+  height: 100%;
+}
+a,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  color: #a00;
+}
+h1 {
+  text-align: center;
+  background-color: #fff;
+  padding: 5px;
+  margin: 0;
+}
+
+/* 레이아웃 외곽 너비 400px 제한*/
+.wrap {
+  max-width: 480px;
+  margin: 0 auto; /* 화면 가운데로 */
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.reviewform textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+input {
+  border: none;
+}

@@ -1,0 +1,27 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+authors = ["Seok Won <ikr@kakao.com>"]
+description = "오늘의 메뉴"
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+actix-rt = "2"  # 웹 서버 열기
+actix-http = "3"  # 웹 서버 열기
+actix-web = "4"  # 웹 서버 열기
+serde = { version = "1.0", features = ["derive"] }  # JSON
+serde_json = "1.0"  # JSON
+serde_derive = "1.0"  # JSON
+futures = "0.3"  # 비동기 support
+
+tera = "1.16.0"  # 웹 홈페이지 tera template
+rust-embed="6.4.0"
+mime_guess = { version = "2" }
+
+actix-web-static-files = "4.0"
+static-files = "0.2.1"
+
+[build-dependencies]
+static-files = "0.2.1"
