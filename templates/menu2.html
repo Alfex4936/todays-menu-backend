@@ -4,6 +4,31 @@
     <title>오늘의 메뉴</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .star {
+        position: relative;
+        font-size: 2rem;
+        color: #ddd;
+      }
+
+      .star input {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .star span {
+        width: 0;
+        position: absolute;
+        left: 0;
+        color: red;
+        overflow: hidden;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <h1 id="per">일반 메뉴판</h1>
@@ -44,7 +69,24 @@
         <h3>햄버거</h3>
         <p>BAGUETTE BURGER</p>
         <p>0000원</p>
-        <a href="#">제품 리뷰 확인</a>
+        <div class="rating">
+          <span class="star">
+            ★★★★★
+            <span style="width: {{ burger_review }}%">★★★★★</span>
+            <input
+              id="star_rate"
+              type="range"
+              value="1"
+              step="1"
+              min="0"
+              max="10"
+              name="rate_param"
+            />
+          </span>
+          <!-- 1부터 10점 (별 3.5개면 7) -->
+        </div>
+        <br />
+        <a href="#">제품 리뷰 확인</br>({{ total_review_burger }}개)</a>
         <br />
         <br />
         <br />

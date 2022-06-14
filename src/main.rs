@@ -1,79 +1,23 @@
 #![allow(proc_macro_derive_resolution_fallback)]
 
 use actix_web::middleware::{Compress, Logger, NormalizePath};
-use actix_web::{get, http, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use actix_web_static_files::ResourceFiles;
 
-use std::cell::RefCell;
 use std::sync::Mutex;
 
-use lazy_static::lazy_static;
-use mime_guess::from_path;
+use backend::{redirect_to, GlobalState};
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use tera::{Context, Tera};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
-lazy_static! {
-    static ref FOOD_KOREAN: HashMap<&'static str, &'static str> = {
-        let mut m = HashMap::new();
-        m.insert("sushi", "스시");
-        m.insert("burger", "햄버거");
-        m
-    };
-}
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Food {
     name: String,
     desc: String,
     picture_url: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Review {
-    writer: String,
-    reivew_txt: String,
-    rate: u8,
-}
-
-#[derive(Debug)]
-pub struct GlobalState {
-    name: String, // 유저 네임
-    reviews: HashMap<String, RefCell<Vec<String>>>,
-}
-
-impl GlobalState {
-    pub fn new() -> Self {
-        let mut m: HashMap<String, RefCell<Vec<String>>> = HashMap::new();
-        m.insert("스시".to_string(), RefCell::new(Vec::new()));
-        m.insert("햄버거".to_string(), RefCell::new(Vec::new()));
-
-        GlobalState {
-            name: "".to_string(),
-            reviews: m,
-        }
-    }
-
-    pub fn change_name(mut self, name: String) -> Self {
-        self.name = name;
-        self
-    }
-
-    pub fn add(&self, food: String, review: String) {
-        self.reviews.get(&food).unwrap().borrow_mut().push(review);
-    }
-
-    pub fn get_review(&self, food: String) -> Vec<String> {
-        let array = self.reviews.get(&food).unwrap().borrow();
-        let mut reviews = vec![];
-        for review in array.iter() {
-            reviews.push(review.to_owned());
-        }
-
-        reviews
-    }
 }
 
 #[derive(RustEmbed)]
@@ -84,18 +28,6 @@ struct Asset;
 pub struct UserParam {
     name: String,
     password: String,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct ReviewParam {
-    review_txt: String,
-    food: String,
-}
-
-fn redirect_to(location: &str) -> HttpResponse {
-    HttpResponse::Found()
-        .append_header((http::header::LOCATION, location))
-        .finish()
 }
 
 #[post("/user/login")]
@@ -109,20 +41,6 @@ async fn post_login(
     data.name = params.name.to_owned();
 
     redirect_to("/sign_favorite.html")
-}
-
-#[post("/review_save")]
-async fn post_review(
-    data: web::Data<Mutex<GlobalState>>,
-    params: web::Form<ReviewParam>,
-) -> impl Responder {
-    println!("=> POST review");
-    let data = data.lock().unwrap();
-
-    data.add(params.food.to_owned(), params.review_txt.to_owned());
-    println!("{:?}", data.get_review(params.food.to_owned())); // 저장된 리뷰 보기
-
-    redirect_to("/menu2.html")
 }
 
 #[get("/")]
@@ -159,44 +77,29 @@ async fn sign_fav_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
-#[get("/menu.html")]
+#[get("/menu2.html")]
 async fn menu_html(
     tera: web::Data<Mutex<Tera>>,
     data: web::Data<Mutex<GlobalState>>,
 ) -> impl Responder {
-    let mut ctx = Context::new();
-    // ctx.insert("name", "test");
-
     let data = data.lock().unwrap();
-    ctx.insert("name", data.name.clone().as_str());
-
     let tera = tera.lock().unwrap();
+
+    let mut ctx = Context::new();
+
+    ctx.insert("name", data.name.clone().as_str());
+    ctx.insert("burger_review", &data.get_review_rate("햄버거".to_string()));
+    ctx.insert(
+        "total_review_burger",
+        &data.get_total_review_counts("햄버거".to_string()),
+    );
+
+    println!("{:?}", ctx);
 
     // let index_html = Asset::get("mainpage.html").unwrap();
     // let index_html = std::str::from_utf8(index_html.data.as_ref()).unwrap();
 
-    let rendered = tera.render("menu.html", &ctx).unwrap();
-    HttpResponse::Ok().content_type("text/html").body(rendered)
-}
-
-#[get("/review/{food}")]
-async fn review_html(
-    tera: web::Data<Mutex<Tera>>,
-    data: web::Data<Mutex<GlobalState>>,
-    food: web::Path<String>,
-) -> impl Responder {
-    println!("=> 리뷰 메뉴");
-
-    let food_name = food.into_inner();
-
-    let data = data.lock().unwrap();
-    let mut ctx = Context::new();
-    ctx.insert("name", &data.name.clone());
-    ctx.insert("food_name", FOOD_KOREAN.get(food_name.as_str()).unwrap());
-
-    let tera = tera.lock().unwrap();
-
-    let rendered = tera.render("review.html", &ctx).unwrap();
+    let rendered = tera.render("menu2.html", &ctx).unwrap();
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
@@ -252,7 +155,7 @@ async fn main() -> std::io::Result<()> {
     println!("===== 오늘의 메뉴 =====");
     println!("Enter: http://localhost:8010/");
 
-    let state = web::Data::new(Mutex::new(GlobalState::new()));
+    let state = web::Data::new(Mutex::new(GlobalState::new().fake()));
 
     let tera = web::Data::new(Mutex::new(
         Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*.html")).unwrap(),
@@ -274,8 +177,8 @@ async fn main() -> std::io::Result<()> {
             .service(sign_fav_html)
             .service(menu_html)
             .service(recommend_html)
-            .service(review_html)
-            .service(post_review)
+            .service(backend::review::review_html)
+            .service(backend::review::post_review)
             .service(post_login)
             .service(ResourceFiles::new("/", generated).do_not_resolve_defaults())
         // 센서 POST
