@@ -1,26 +1,50 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>오늘의 메뉴</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/signup.css">
-    </head>
-    <body>
-        <h1 id="per">오늘의 메뉴</h1>
-        <h2 id="pretty">회원 정보를 입력하세요.</h2>
-        <div class="container">
-            
-            <input type="name" placeholder="Name" id="name" class="account">
-            <input type="text" placeholder="ID" id="id" class="account">
-            <input type="password" placeholder="Password" id="password" class="account">
-            <input type="name" placeholder="Email" class="account">
-            
-            <button id="login" class="account">가입하기</button>
+<html lang="en">
+  <head>
+    <title>오늘의 메뉴</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+  </head>
+  <body>
+    <h1 id="per">오늘의 메뉴</h1>
+    <h2 id="pretty">회원 정보를 입력하세요.</h2>
+    <div class="container">
+      <form action="/user/signup" method="POST">
+        <input
+          type="text"
+          placeholder="이름"
+          id="name"
+          name="name"
+          class="account"
+          value="{{ name_cache }}"
+          required
+        />
+        <!-- <input type="text" placeholder="아이디" id="id" class="account" /> -->
+        <input
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          id="password"
+          class="account"
+          value="{{ password_cache }}"
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="이메일"
+          class="account"
+          value="{{ email_cache }}"
+          required
+        />
 
-            <p id="alert" class="account"> </p>
-          </div>
+        <button type="submit" id="login" class="account">가입하기</button>
 
-          <script src="js/signup.js"></script>
-    </body>
+        <p id="alert" class="account"></p>
+      </form>
+    </div>
+
+    <script src="/js/signup.js"></script>
+  </body>
 </html>

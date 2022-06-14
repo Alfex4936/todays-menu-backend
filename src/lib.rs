@@ -18,7 +18,9 @@ use fake::{Fake, Faker};
 
 #[derive(Debug)]
 pub struct GlobalState {
-    pub name: String, // 유저 네임
+    pub name: String,     // 유저 네임
+    pub password: String, // 유저 비번
+    pub email: String,    // 이메일
     pub reviews: HashMap<String, RefCell<Vec<Review>>>,
 }
 
@@ -27,9 +29,12 @@ impl GlobalState {
         let mut m: HashMap<String, RefCell<Vec<Review>>> = HashMap::new();
         m.insert("스시".to_string(), RefCell::new(Vec::new()));
         m.insert("햄버거".to_string(), RefCell::new(Vec::new()));
+        m.insert("닭강정".to_string(), RefCell::new(Vec::new()));
 
         GlobalState {
             name: "".to_string(),
+            password: "".to_string(),
+            email: "".to_string(),
             reviews: m,
         }
     }
@@ -46,7 +51,7 @@ impl GlobalState {
             let review = Review {
                 writer: Name(EN).fake(),
                 review_txt: review_txt.join(" "),
-                rate: (5..=10).fake::<u8>(),
+                rate: (1..=10).fake::<u8>(),
             };
             self.add("스시".to_string(), review);
         }
@@ -56,9 +61,20 @@ impl GlobalState {
             let review = Review {
                 writer: Name(EN).fake(),
                 review_txt: review_txt.join(" "),
-                rate: (5..=10).fake::<u8>(),
+                rate: (4..=10).fake::<u8>(),
             };
             self.add("햄버거".to_string(), review);
+        }
+        for _ in 0..(100..500).fake::<i32>() {
+            // 닭강정
+            let review_txt: Vec<String> = Words(5..30).fake();
+
+            let review = Review {
+                writer: Name(EN).fake(),
+                review_txt: review_txt.join(" "),
+                rate: (5..=7).fake::<u8>(),
+            };
+            self.add("닭강정".to_string(), review);
         }
 
         self
@@ -76,6 +92,14 @@ impl GlobalState {
         // review.rate = rate;
 
         self.reviews.get(&food).unwrap().borrow_mut().push(review);
+    }
+
+    pub fn get_name(&self, name: &str) -> bool {
+        if self.name.eq(name) {
+            true
+        } else {
+            false
+        }
     }
 
     pub fn get_review(&self, food: String) -> Vec<Review> {

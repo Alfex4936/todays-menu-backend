@@ -40,7 +40,24 @@
         <h3>닭강정</h3>
         <p>삼삼돈까스</p>
         <p>0000원</p>
-        <a href="#" class="pay">제품 리뷰 확인</a>
+        <div class="rating">
+          <span class="star">
+            ★★★★★
+            <span style="width: {{ dakgangjung_review }}%">★★★★★</span>
+            <input
+              id="star_rate"
+              type="range"
+              value="1"
+              step="1"
+              min="0"
+              max="10"
+              name="rate_param"
+            />
+          </span>
+          <!-- 1부터 10점 (별 3.5개면 7) -->
+        </div>
+        <br />
+        <a href="#">제품 리뷰 확인</br>({{ total_review_dakgangjung }}개)</a>
         <br />
         <br />
         <br />
@@ -54,7 +71,24 @@
         <h3>초밥</h3>
         <p>만권화밥</p>
         <p>0000원</p>
-        <a href="#">제품 리뷰 확인</a>
+        <div class="rating">
+          <span class="star">
+            ★★★★★
+            <span style="width: {{ sushi_review }}%">★★★★★</span>
+            <input
+              id="star_rate"
+              type="range"
+              value="1"
+              step="1"
+              min="0"
+              max="10"
+              name="rate_param"
+            />
+          </span>
+          <!-- 1부터 10점 (별 3.5개면 7) -->
+        </div>
+        <br />
+        <a href="#">제품 리뷰 확인</br>({{ total_review_sushi }}개)</a>
         <br />
         <br />
         <br />
@@ -100,7 +134,24 @@
         <h3>스시</h3>
         <p>밀양덮밥</p>
         <p>0000원</p>
-        <a href="#">제품 리뷰 확인</a>
+        <div class="rating">
+          <span class="star">
+            ★★★★★
+            <span style="width: {{ sushi_review }}%">★★★★★</span>
+            <input
+              id="star_rate"
+              type="range"
+              value="1"
+              step="1"
+              min="0"
+              max="10"
+              name="rate_param"
+            />
+          </span>
+          <!-- 1부터 10점 (별 3.5개면 7) -->
+        </div>
+        <br />
+        <a href="#">제품 리뷰 확인</br>({{ total_review_sushi }}개)</a>
         <br />
         <br />
         <br />

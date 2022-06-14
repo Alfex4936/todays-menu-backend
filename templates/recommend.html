@@ -60,11 +60,11 @@
         />
       </svg>
       <div class="trail">
-        <div class="box1 active">햄버거</div>
-        <div class="box2">파스타</div>
-        <div class="box3">라면</div>
-        <div class="box4">덮밥</div>
-        <div class="box5">자장면</div>
+        {% for food in foods %} {% if loop.index == 1 %}
+        <div class="box{{ loop.index }} active">{{ food.name }}</div>
+        {% else %}
+        <div class="box{{ loop.index }}">{{ food.name }}</div>
+        {% endif %} {% endfor %}
       </div>
     </div>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
