@@ -14,65 +14,23 @@
   </head>
   <body id="body">
     <h1 id="per">{{ name }}님을 위한 추천</h1>
+    <h1 id="per2"><a href="menu2.html"> 관심 없음 </a></h1>
     <div class="container">
       <div class="slider">
-        <div class="box1 box">
+        {% for food in foods %}
+        <div class="box{{ loop.index }} box">
           <div class="bg"></div>
           <div class="details">
-            <h1>싸고 듬직한 선택</h1>
-            <p>햄벅</p>
+            <h1>{{ food.name }}</h1>
+            <p>{{ food.desc }}</p>
             <button>주문하기</button>
           </div>
 
-          <!-- <div class="illustration"><div class="inner"></div></div> -->
           <div class="illustration">
-            <img src="images/hamburger.png" width="500" height="370" />
+            <img src="{{ food.picture_url }}" width="500" height="370" />
           </div>
         </div>
-
-        <div class="box2 box">
-          <div class="bg"></div>
-          <div class="details">
-            <h1>파스타</h1>
-            <p>파스타ㅋㅊㄴㅋㄴㅊㅊㅇㅎㅇ</p>
-            <button>주문하기</button>
-          </div>
-
-          <div class="illustration"><div class="inner"></div></div>
-        </div>
-
-        <div class="box3 box">
-          <div class="bg"></div>
-          <div class="details">
-            <h1>라면</h1>
-            <p>라면?</p>
-            <button>주문하기</button>
-          </div>
-
-          <div class="illustration"><div class="inner"></div></div>
-        </div>
-
-        <div class="box4 box">
-          <div class="bg"></div>
-          <div class="details">
-            <h1>덮밥</h1>
-            <p>ㅇㅈㅁㅂ눶ㅁ붜ㅏ</p>
-            <button>주문하기</button>
-          </div>
-
-          <div class="illustration"><div class="inner"></div></div>
-        </div>
-
-        <div class="box5 box">
-          <div class="bg"></div>
-          <div class="details">
-            <h1>자장면</h1>
-            <p>ㅋㅊㅊㅋㄴ</p>
-            <button>주문하기</button>
-          </div>
-
-          <div class="illustration"><div class="inner"></div></div>
-        </div>
+        {% endfor %}
       </div>
 
       <svg

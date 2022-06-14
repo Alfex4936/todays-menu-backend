@@ -1,3 +1,5 @@
+#![allow(proc_macro_derive_resolution_fallback)]
+
 use actix_web::middleware::{Compress, Logger, NormalizePath};
 use actix_web::{get, http, post, web, App, HttpResponse, HttpServer, Responder};
 use actix_web_static_files::ResourceFiles;
@@ -7,13 +9,21 @@ use std::sync::Mutex;
 use mime_guess::from_path;
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
+use serde_json::json;
 use tera::{Context, Tera};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Food {
+    name: String,
+    desc: String,
+    picture_url: String,
+}
+
 #[derive(Debug)]
 pub struct GlobalState {
-    name: String,
+    name: String, // 유저 네임
 }
 
 impl GlobalState {
@@ -126,24 +136,52 @@ async fn recommend_html(
     tera: web::Data<Mutex<Tera>>,
     data: web::Data<Mutex<GlobalState>>,
 ) -> impl Responder {
-    let mut ctx = Context::new();
-    // ctx.insert("name", "test");
-
     let data = data.lock().unwrap();
-    ctx.insert("name", data.name.clone().as_str());
+
+    let mut foods: Vec<Food> = vec![];
+    foods.push(Food {
+        name: "햄버거".to_string(),
+        desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
+        picture_url: "images/hamburger.png".to_string(),
+    });
+    foods.push(Food {
+        name: "떡볶이".to_string(),
+        desc: "떡과 부재료를 양념에 볶거나 끓여서 먹는 한식".to_string(),
+        picture_url: "images/tteokbokki.png".to_string(),
+    });
+    foods.push(Food {
+        name: "라면".to_string(),
+        desc: "라면은 국수를 증기로 익힌 뒤 기름에 튀겨 말린 것에 분말 스프를 별도로 첨부한 즉석 식품, 또는 그것을 물에 넣고 끓인 요리를 말한다.".to_string(),
+        picture_url: "images/ramyeon.png".to_string(),
+    });
+    foods.push(Food {
+        name: "덮밥".to_string(),
+        desc: "밥 위에 고기, 야채, 소스 등을 넣고 같이 섞어 먹는 요리의 일종이다.".to_string(),
+        picture_url: "images/dupbap.png".to_string(),
+    });
+    foods.push(Food {
+        name: "우동".to_string(),
+        desc: "소바와 함께 일본의 전통적이고 가장 대중적인 면 요리.\n소바는 간토, 우동은 간사이를 대표하는 면요리다.".to_string(),
+        picture_url: "images/udon.png".to_string(),
+    });
 
     let tera = tera.lock().unwrap();
+
+    let mut context = Context::new();
+    context.insert("name", data.name.clone().as_str());
+    context.insert("foods", &foods);
 
     // let index_html = Asset::get("mainpage.html").unwrap();
     // let index_html = std::str::from_utf8(index_html.data.as_ref()).unwrap();
 
-    let rendered = tera.render("recommend.html", &ctx).unwrap();
+    let rendered = tera.render("recommend.html", &context).unwrap();
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     println!("===== 오늘의 메뉴 =====");
+    println!("Enter: http://localhost:8010/");
 
     let state = web::Data::new(Mutex::new(GlobalState::new()));
 
