@@ -12,9 +12,9 @@ use crate::{redirect_to, GlobalState};
 lazy_static! {
     static ref FOOD_KOREAN: HashMap<&'static str, &'static str> = {
         let mut m = HashMap::new();
-        m.insert("sushi", "스시");
         m.insert("burger", "햄버거");
-        m.insert("dakgangjung", "닭강정");
+        m.insert("mayak", "마약계란덮밥");
+        m.insert("momil", "냉모밀");
         m.insert("ramen", "라면");
         m.insert("tteokbokki", "떡볶이");
         m.insert("udon", "우동");
@@ -53,13 +53,19 @@ async fn review_html(
     let food_name = food.into_inner();
 
     let data = data.lock().unwrap();
+
+    let mut reviews: Vec<Review> =
+        data.get_review(FOOD_KOREAN.get(food_name.as_str()).unwrap().to_string());
+    reviews.reverse(); // 최신 리뷰순
+
     let mut ctx = Context::new();
     ctx.insert("name", &data.name.clone());
     ctx.insert("food_name", FOOD_KOREAN.get(food_name.as_str()).unwrap());
+    ctx.insert("reviews", &reviews);
 
     let tera = tera.lock().unwrap();
 
-    let rendered = tera.render("review.html", &ctx).unwrap();
+    let rendered = tera.render("reviewpage.html", &ctx).unwrap();
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 #[post("/review_save")]

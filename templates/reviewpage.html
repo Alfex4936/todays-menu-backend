@@ -1,111 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reviewpage.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/reviewpage.css" />
     <title>사용자 리뷰 목록</title>
   </head>
   <body>
-    <header>
-      
-    </header>
-    <h1>사용자들의<br/>리뷰 모음</h1>
+    <header></header>
+    <h1>{{ food_name }}<br />리뷰 모음</h1>
+    <!-- TODO: right up down left rotateL rotateR scaleUp scaleDown 배열 섞기 -->
     <main>
       <section>
+        {% for review in reviews %}
         <div class="review review-right">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
+          <div class="review">
+            <div class="name">{{ review.writer }}</div>
+            <div class="rating score">
+                <span class="star">
+                  ★★★★★
+                  <span style="width: {{ review.rate * 10 }}%">★★★★★</span>
+                  <input
+                    id="star_rate"
+                    type="range"
+                    value="1"
+                    step="1"
+                    min="0"
+                    max="10"
+                    name="rate_param"
+                  />
+                </span>
+            <div class="content">{{ review.review_txt }}</div>
+          </div>
         </div>
-        <div class="review review-up">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-right">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-up">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-      </section>
-      <section>
-        <div class="review review-up">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-down">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-right">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-left">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-      </section>
-      <section>
-        <div class="review review-rotateL">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-rotateR">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-scaleUp">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
-        <div class="review review-scaleDown">
-            <div class="review">
-                <div class="name">홍길동</div>
-                <div class="score">★★★★★</div>
-                <div class="content">맛있어맛있어맛있어맛있어맛있어맛있어</div>        
-            </div>   
-        </div>
+        {% endfor %}
       </section>
     </main>
 
-
-    <script src="js/reviewpage.js"></script>
+    <script src="/js/reviewpage.js"></script>
   </body>
 </html>
