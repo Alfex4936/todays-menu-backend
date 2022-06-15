@@ -1,0 +1,128 @@
+* { box-sizing: border-box; }
+body { margin: 0px; }
+main { padding-bottom: 100px; }
+header {
+  background-image: url('../images/Originals/ajou_food_bg2_blur.jpg');
+  background-repeat : no-repeat;
+  background-size : cover;
+  
+  height: 600px;
+  padding: 100px;
+}
+
+h1{
+    font-size: 72px;
+    color:green;
+    text-align: center;
+}
+section {
+  display: flex;
+  justify-content: space-between;
+  padding: 5%;
+}
+section .review.review-up {
+  background-color: #aaff00;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
+}
+
+section .review.review-down {
+    background-color: #ff9800;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-left {
+    background-color: #aaff00;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-right {
+    background-color: #ff9800;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-rotateL {
+    background-color: #ff9800;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-rotateR{
+    background-color: #aaff00;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-scaleUp {
+    background-color: #ff9800;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+section .review.review-scaleDown {
+    background-color: #aaff00;
+    width: 23%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+.review {
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.review-up {
+  transform: translate(0, 100px);
+}
+.review-down {
+  transform: translate(0, -100px);
+}
+.review-right {
+  transform: translate(-100px, 0);
+}
+.review-left {
+  transform: translate(100px, 0);
+}
+.review-rotateL {
+  transform: rotate(180deg);
+}
+.review-rotateR {
+  transform: rotate(-180deg);
+}
+.review-scaleUp {
+  transform: scale(.5);
+}
+.review-scaleDown {
+  transform: scale(1.5);
+}
+.review.show {
+  opacity: 1;
+  transform: none;
+}
+
+.name{
+    font-size: 40px;
+    margin:40px;
+}
+
+.score{
+    text-align: right;
+    font-size: 30px;
+
+    margin:40px;
+}
+
+.content{
+    font-size: 20px;
+    margin:40px;
+}
