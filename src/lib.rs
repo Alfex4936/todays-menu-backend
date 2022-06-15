@@ -16,7 +16,7 @@ use std::collections::HashMap;
 
 use fake::{Fake, Faker};
 
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct GlobalState {
     pub name: String,     // 유저 네임
     pub password: String, // 유저 비번
@@ -32,10 +32,8 @@ impl GlobalState {
         m.insert("닭강정".to_string(), RefCell::new(Vec::new()));
 
         GlobalState {
-            name: "".to_string(),
-            password: "".to_string(),
-            email: "".to_string(),
             reviews: m,
+            ..Default::default()
         }
     }
 
