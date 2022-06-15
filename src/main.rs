@@ -20,8 +20,8 @@ lazy_static! {
     static ref ALL_MENU: HashMap<&'static str, &'static str> = {
         let mut m: HashMap<&'static str, &'static str> = HashMap::new();
         m.insert("햄버거", "burger");
-        m.insert("스시", "sushi");
-        m.insert("닭강정", "dakgangjung");
+        m.insert("마약계란덮밥", "mayak");
+        m.insert("냉모밀", "momil");
         m.insert("라면", "ramen");
         m.insert("떡볶이", "tteokbokki");
         m.insert("우동", "udon");

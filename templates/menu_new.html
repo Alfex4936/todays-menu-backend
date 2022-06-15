@@ -36,7 +36,6 @@
         overflow: hidden;
         pointer-events: none;
       }
-
     </style>
   </head>
   <body>
@@ -110,12 +109,12 @@
           <h2
             class="text-bg-orange name text-black-100 font-extrabold text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full"
           >
-          냉모밀 + 새우튀김<br/>삼삼돈까스 / 7,000원</br></br>리뷰 {{ total_review_dakgangjung }}개
+          냉모밀 + 새우튀김<br/>삼삼돈까스 / 7,000원</br></br>리뷰 {{ total_review_momil }}개
           </h2>
           <div class="rating px-8 py-10 text-center hover:shadow-xl name transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
             <span class="star">
               ★★★★★
-              <span style="width: {{ dakgangjung_review }}%">★★★★★</span>
+              <span style="width: {{ momil_review }}%">★★★★★</span>
               <input
                 id="star_rate"
                 type="range"
@@ -136,9 +135,9 @@
           <div class="image image-2">
             <img
               src="images/냉모밀+새우튀김.png"
-              alt="닭강정"
+              alt="냉새"
               style="cursor: pointer;"
-              onclick="window.location.href = '/review/dakgangjung'"
+              onclick="window.location.href = '/review/momil'"
               class="product rounded transition-all duration-500"
             />
           </div>
@@ -148,12 +147,12 @@
           <h2
             class="text-bg-orange name text-black-100 font-extrabold text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full"
           >
-          마약계란덮밥<br/>만권화밥 / 6,000원</br></br>리뷰 {{ total_review_sushi }}개
+          마약계란덮밥<br/>만권화밥 / 6,000원</br></br>리뷰 {{ total_review_mayak }}개
           </h2>
           <div class="rating px-8 py-10 text-center hover:shadow-xl name transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
             <span class="star">
               ★★★★★
-              <span style="width: {{ sushi_review }}%">★★★★★</span>
+              <span style="width: {{ mayak_review }}%">★★★★★</span>
               <input
                 id="star_rate"
                 type="range"
@@ -174,9 +173,9 @@
           <div class="image image-2">
             <img
               src="images/마약계란덮밥.png"
-              alt="스시"
+              alt="마약"
               style="cursor: pointer;"
-              onclick="window.location.href = '/review/sushi'"
+              onclick="window.location.href = '/review/mayak'"
               class="product rounded transition-all duration-500"
             />
           </div>

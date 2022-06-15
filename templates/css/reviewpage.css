@@ -1,19 +1,25 @@
-* { box-sizing: border-box; }
-body { margin: 0px; }
-main { padding-bottom: 100px; }
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0px;
+}
+main {
+  padding-bottom: 100px;
+}
 header {
-  background-image: url('../images/Originals/ajou_food_bg2_blur.jpg');
-  background-repeat : no-repeat;
-  background-size : cover;
-  
+  background-image: url("../images/Originals/ajou_food_bg2_blur.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
   height: 600px;
   padding: 100px;
 }
 
-h1{
-    font-size: 72px;
-    color:green;
-    text-align: center;
+h1 {
+  font-size: 72px;
+  color: green;
+  text-align: center;
 }
 section {
   display: flex;
@@ -28,57 +34,57 @@ section .review.review-up {
 }
 
 section .review.review-down {
-    background-color: #ff9800;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #ff9800;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 section .review.review-left {
-    background-color: #aaff00;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #aaff00;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 section .review.review-right {
-    background-color: #ff9800;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #ff9800;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 section .review.review-rotateL {
-    background-color: #ff9800;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #ff9800;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
-section .review.review-rotateR{
-    background-color: #aaff00;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+section .review.review-rotateR {
+  background-color: #aaff00;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 section .review.review-scaleUp {
-    background-color: #ff9800;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #ff9800;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 section .review.review-scaleDown {
-    background-color: #aaff00;
-    width: 23%;
-    height: 300px;
-    border-radius: 20px;
+  background-color: #aaff00;
+  width: 23%;
+  height: 300px;
+  border-radius: 20px;
 }
 
 .review {
   opacity: 0;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .review-up {
@@ -100,7 +106,7 @@ section .review.review-scaleDown {
   transform: rotate(-180deg);
 }
 .review-scaleUp {
-  transform: scale(.5);
+  transform: scale(0.5);
 }
 .review-scaleDown {
   transform: scale(1.5);
@@ -110,19 +116,43 @@ section .review.review-scaleDown {
   transform: none;
 }
 
-.name{
-    font-size: 40px;
-    margin:40px;
+.name {
+  font-size: 40px;
+  margin: 40px;
 }
 
-.score{
-    text-align: right;
-    font-size: 30px;
+.score {
+  text-align: right;
+  font-size: 30px;
 
-    margin:40px;
+  margin: 40px;
 }
 
-.content{
-    font-size: 20px;
-    margin:40px;
+.content {
+  font-size: 20px;
+  margin: 40px;
+}
+
+.star {
+  position: relative;
+  font-size: 2rem;
+  color: #ddd;
+}
+
+.star input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.star span {
+  width: 0;
+  position: absolute;
+  left: 0;
+  color: #ffdf00;
+  overflow: hidden;
+  pointer-events: none;
 }

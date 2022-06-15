@@ -274,10 +274,10 @@ img {
     url("https://post-phinf.pstatic.net/MjAyMDA2MTVfMjEz/MDAxNTkyMjA4MjEwNzM3.qba1Riai_g_lE5OlkrGjg8JeGsDk9SqEbhN2aS1OJGQg.qT_X8hJGEvfu18DdsGNFu0e7l3Xkxd3YL7zrNDzAt34g.JPEG/pc0031002295.jpg?type=w1200");
 }
 .image-2::before {
-  background: center / cover url("../images/sushi.jpg");
+  background: center / cover url("../images/마약계란덮밥.png");
 }
 .image-3::before {
-  background: center / cover url("../images/chicken.jpg");
+  background: center / cover url("../images/냉모밀+새우튀김.png");
 }
 .image-4::before {
   background: center / cover url("../images/ramyeon.jpg");

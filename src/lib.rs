@@ -14,7 +14,7 @@ use actix_web::{http::header::LOCATION, HttpResponse};
 use std::cell::RefCell;
 use std::collections::HashMap;
 
-use fake::{Fake, Faker};
+use fake::Fake;
 
 #[derive(Debug, Default)]
 pub struct GlobalState {
@@ -27,9 +27,9 @@ pub struct GlobalState {
 impl GlobalState {
     pub fn new() -> Self {
         let mut m: HashMap<String, RefCell<Vec<Review>>> = HashMap::new();
-        m.insert("스시".to_string(), RefCell::new(Vec::new()));
         m.insert("햄버거".to_string(), RefCell::new(Vec::new()));
-        m.insert("닭강정".to_string(), RefCell::new(Vec::new()));
+        m.insert("냉모밀".to_string(), RefCell::new(Vec::new()));
+        m.insert("마약계란덮밥".to_string(), RefCell::new(Vec::new()));
         m.insert("라면".to_string(), RefCell::new(Vec::new()));
         m.insert("떡볶이".to_string(), RefCell::new(Vec::new()));
         m.insert("우동".to_string(), RefCell::new(Vec::new()));
@@ -47,7 +47,7 @@ impl GlobalState {
         use fake::locales::EN;
 
         for _ in 0..(100..200).fake::<i32>() {
-            // 스시 랜덤 데이터
+            // 마약계란덮밥 랜덤 데이터
             let review_txt: Vec<String> = Words(5..30).fake();
 
             let review = Review {
@@ -55,9 +55,9 @@ impl GlobalState {
                 review_txt: review_txt.join(" "),
                 rate: (1..=10).fake::<u8>(),
             };
-            self.add("스시".to_string(), review);
+            self.add("마약계란덮밥".to_string(), review);
         }
-        for _ in 0..(100..500).fake::<i32>() {
+        for _ in 0..(200..600).fake::<i32>() {
             let review_txt: Vec<String> = Words(5..30).fake();
 
             let review = Review {
@@ -68,7 +68,7 @@ impl GlobalState {
             self.add("햄버거".to_string(), review);
         }
         for _ in 0..(100..300).fake::<i32>() {
-            // 닭강정
+            // 냉모밀
             let review_txt: Vec<String> = Words(5..30).fake();
 
             let review = Review {
@@ -76,7 +76,7 @@ impl GlobalState {
                 review_txt: review_txt.join(" "),
                 rate: (5..=7).fake::<u8>(),
             };
-            self.add("닭강정".to_string(), review);
+            self.add("냉모밀".to_string(), review);
         }
         for _ in 0..(100..800).fake::<i32>() {
             let review_txt: Vec<String> = Words(5..30).fake();
