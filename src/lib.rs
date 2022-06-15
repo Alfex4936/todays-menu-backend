@@ -48,7 +48,7 @@ impl GlobalState {
 
         for _ in 0..(100..200).fake::<i32>() {
             // 마약계란덮밥 랜덤 데이터
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),
@@ -58,7 +58,7 @@ impl GlobalState {
             self.add("마약계란덮밥".to_string(), review);
         }
         for _ in 0..(200..600).fake::<i32>() {
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),
@@ -69,7 +69,7 @@ impl GlobalState {
         }
         for _ in 0..(100..300).fake::<i32>() {
             // 냉모밀
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),
@@ -79,7 +79,7 @@ impl GlobalState {
             self.add("냉모밀".to_string(), review);
         }
         for _ in 0..(100..800).fake::<i32>() {
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),
@@ -89,7 +89,7 @@ impl GlobalState {
             self.add("라면".to_string(), review);
         }
         for _ in 0..(100..700).fake::<i32>() {
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),
@@ -99,7 +99,7 @@ impl GlobalState {
             self.add("떡볶이".to_string(), review);
         }
         for _ in 0..(100..600).fake::<i32>() {
-            let review_txt: Vec<String> = Words(5..30).fake();
+            let review_txt: Vec<String> = Words(5..15).fake();
 
             let review = Review {
                 writer: Name(EN).fake(),

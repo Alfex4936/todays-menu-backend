@@ -14,23 +14,22 @@
     <main>
       <section>
         {% for review in reviews %}
-        <div class="review review-right">
-          <div class="review">
-            <div class="name">{{ review.writer }}</div>
-            <div class="rating score">
-                <span class="star">
-                  ★★★★★
-                  <span style="width: {{ review.rate * 10 }}%">★★★★★</span>
-                  <input
-                    id="star_rate"
-                    type="range"
-                    value="1"
-                    step="1"
-                    min="0"
-                    max="10"
-                    name="rate_param"
-                  />
-                </span>
+        <div class="review review-left">
+          <div class="name">{{ review.writer }}</div>
+          <div class="rating score">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ review.rate * 10 }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
             <div class="content">{{ review.review_txt }}</div>
           </div>
         </div>

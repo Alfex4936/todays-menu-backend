@@ -4,9 +4,6 @@
 body {
   margin: 0px;
 }
-main {
-  padding-bottom: 100px;
-}
 header {
   background-image: url("../images/Originals/ajou_food_bg2_blur.jpg");
   background-repeat: no-repeat;
@@ -21,37 +18,48 @@ h1 {
   color: green;
   text-align: center;
 }
+
 section {
-  display: flex;
+  --n: 4; /* max col */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(300px, 100% / var(--n)), 1fr)
+  );
   justify-content: space-between;
   padding: 5%;
+  padding-bottom: 100px;
 }
 section .review.review-up {
   background-color: #aaff00;
-  width: 23%;
-  height: 300px;
+  width: auto;
+  height: auto;
   border-radius: 20px;
+  margin: 20px;
 }
 
 section .review.review-down {
   background-color: #ff9800;
-  width: 23%;
-  height: 300px;
+  width: auto;
+  height: auto;
   border-radius: 20px;
+  margin: 20px;
 }
 
 section .review.review-left {
   background-color: #aaff00;
-  width: 23%;
-  height: 300px;
+  width: auto;
+  height: auto;
   border-radius: 20px;
+  margin: 20px;
 }
 
 section .review.review-right {
   background-color: #ff9800;
-  width: 23%;
-  height: 300px;
+  width: auto;
+  height: auto;
   border-radius: 20px;
+  margin: 20px;
 }
 
 section .review.review-rotateL {
@@ -119,12 +127,12 @@ section .review.review-scaleDown {
 .name {
   font-size: 40px;
   margin: 40px;
+  text-align: center;
 }
 
 .score {
-  text-align: right;
+  text-align: center;
   font-size: 30px;
-
   margin: 40px;
 }
 
