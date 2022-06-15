@@ -3,29 +3,50 @@
   <head>
     <title>오늘의 메뉴</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/mainpage.css" />
+    <link rel="stylesheet" href="/css/main2.css" />
+    <!-- /css 로 바꾸기 -->
   </head>
-
   <body>
-    <h1 id="per">오늘의 메뉴</h1>
-    <h2 id="pretty">아주대학교 학생식당</h2>
-    <div class="login-box">
-      <h2>로그인</h2>
-      <form action="/user/login" method="POST">
-        <div class="user-box">
-          <input type="text" name="name" required />
-          <label>사용자 이름</label>
+    <main class="container">
+      <form class="form" action="/user/login" method="POST">
+        <div class="form__image"></div>
+        <img class="form__logo" src="images/today_menu_logo.png" />
+        <div class="input">
+          <input
+            id="name"
+            name="name"
+            type="text"
+            class="input__element"
+            placeholder=" "
+          />
+          <label class="input__label" for="name">이름</label>
         </div>
-        <div class="user-box">
-          <input type="password" name="password" required />
-          <label>비밀번호</label>
+        <!-- <div class="input">
+          <input
+            id="email"
+            type="email"
+            class="input__element"
+            placeholder=" "
+          />
+          <label class="input__label" for="email">Email</label>
+        </div> -->
+        <div class="input">
+          <input
+            id="pasword"
+            type="password"
+            name="password"
+            class="input__element"
+            placeholder=" "
+          />
+          <label class="input__label" for="password">비밀번호</label>
         </div>
-        <a href="/signup.html"> 회원가입 </a>
-        <a href="#" onclick="this.parentNode.submit()"> 접속하기 </a>
+        <button type="submit" class="button">
+          <div class="button__label">로그인</div>
+          <div class="button__icon"></div>
+        </button>
       </form>
-    </div>
+    </main>
 
-    <script src="/js/mainpage.js"></script>
+    <script src="/js/main2.js"></script>
   </body>
 </html>

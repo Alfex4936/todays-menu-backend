@@ -35,6 +35,7 @@ impl GlobalState {
         m.insert("우동".to_string(), RefCell::new(Vec::new()));
 
         GlobalState {
+            name: "ajounice".to_string(),
             reviews: m,
             ..Default::default()
         }
