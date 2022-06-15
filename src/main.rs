@@ -8,7 +8,7 @@ use std::sync::Mutex;
 
 use backend::{redirect_to, GlobalState};
 use lazy_static::lazy_static;
-use rand::seq::SliceRandom; // 0.7.2
+use rand::seq::SliceRandom;
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -95,8 +95,8 @@ async fn main_html(
     let data = data.lock().unwrap();
 
     println!("=> User name: {}", data.name);
-    let ctx = Context::new();
-    // ctx.insert("name", "test");
+    let mut ctx = Context::new();
+    ctx.insert("name", &data.name.to_owned()); // 이전 상태
 
     let tera = tera.lock().unwrap();
 
