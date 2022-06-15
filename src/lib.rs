@@ -30,6 +30,9 @@ impl GlobalState {
         m.insert("스시".to_string(), RefCell::new(Vec::new()));
         m.insert("햄버거".to_string(), RefCell::new(Vec::new()));
         m.insert("닭강정".to_string(), RefCell::new(Vec::new()));
+        m.insert("라면".to_string(), RefCell::new(Vec::new()));
+        m.insert("떡볶이".to_string(), RefCell::new(Vec::new()));
+        m.insert("우동".to_string(), RefCell::new(Vec::new()));
 
         GlobalState {
             reviews: m,
@@ -42,7 +45,7 @@ impl GlobalState {
         use fake::faker::name::raw::*;
         use fake::locales::EN;
 
-        for _ in 0..(100..500).fake::<i32>() {
+        for _ in 0..(100..200).fake::<i32>() {
             // 스시 랜덤 데이터
             let review_txt: Vec<String> = Words(5..30).fake();
 
@@ -63,7 +66,7 @@ impl GlobalState {
             };
             self.add("햄버거".to_string(), review);
         }
-        for _ in 0..(100..500).fake::<i32>() {
+        for _ in 0..(100..300).fake::<i32>() {
             // 닭강정
             let review_txt: Vec<String> = Words(5..30).fake();
 
@@ -73,6 +76,36 @@ impl GlobalState {
                 rate: (5..=7).fake::<u8>(),
             };
             self.add("닭강정".to_string(), review);
+        }
+        for _ in 0..(100..800).fake::<i32>() {
+            let review_txt: Vec<String> = Words(5..30).fake();
+
+            let review = Review {
+                writer: Name(EN).fake(),
+                review_txt: review_txt.join(" "),
+                rate: (6..=10).fake::<u8>(),
+            };
+            self.add("라면".to_string(), review);
+        }
+        for _ in 0..(100..700).fake::<i32>() {
+            let review_txt: Vec<String> = Words(5..30).fake();
+
+            let review = Review {
+                writer: Name(EN).fake(),
+                review_txt: review_txt.join(" "),
+                rate: (4..=10).fake::<u8>(),
+            };
+            self.add("떡볶이".to_string(), review);
+        }
+        for _ in 0..(100..600).fake::<i32>() {
+            let review_txt: Vec<String> = Words(5..30).fake();
+
+            let review = Review {
+                writer: Name(EN).fake(),
+                review_txt: review_txt.join(" "),
+                rate: (5..=10).fake::<u8>(),
+            };
+            self.add("우동".to_string(), review);
         }
 
         self

@@ -8,6 +8,7 @@ use std::sync::Mutex;
 
 use backend::{redirect_to, GlobalState};
 use lazy_static::lazy_static;
+use rand::seq::SliceRandom; // 0.7.2
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -21,6 +22,9 @@ lazy_static! {
         m.insert("햄버거", "burger");
         m.insert("스시", "sushi");
         m.insert("닭강정", "dakgangjung");
+        m.insert("라면", "ramen");
+        m.insert("떡볶이", "tteokbokki");
+        m.insert("우동", "udon");
         m
     };
 }
@@ -205,6 +209,22 @@ async fn recommend_html(
         picture_url: "images/udon.png".to_string(),
         ..Default::default()
     });
+    // foods.push(Food {
+    //     name: "햄버거".to_string(),
+    //     desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
+    //     picture_url: "images/hamburger.png".to_string(),
+    //     ..Default::default()
+    // });
+    // foods.push(Food {
+    //     name: "햄버거".to_string(),
+    //     desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
+    //     picture_url: "images/hamburger.png".to_string(),
+    //     ..Default::default()
+    // });
+
+    // let sample: Vec<_> = foods
+    //     .choose_multiple(&mut rand::thread_rng(), 5)
+    //     .collect();
 
     let tera = tera.lock().unwrap();
 

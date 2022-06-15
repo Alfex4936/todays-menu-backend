@@ -28,137 +28,210 @@
         overflow: hidden;
         pointer-events: none;
       }
+
+      .wrapper {
+        --n: 4; /* max col */
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(max(300px, 100%/var(--n)), 1fr) );
+      }
     </style>
   </head>
   <body>
     <h1 id="per">일반 메뉴판</h1>
     <h2 id="pretty">아주대학교 학생식당</h2>
 
-    <div class="food">
-      <img src="images/chicken.jpg" width="300" height="200" />
-      <div class="text">
-        <h3>닭강정</h3>
-        <p>삼삼돈까스</p>
-        <p>0000원</p>
-        <div class="rating">
-          <span class="star">
-            ★★★★★
-            <span style="width: {{ dakgangjung_review }}%">★★★★★</span>
-            <input
-              id="star_rate"
-              type="range"
-              value="1"
-              step="1"
-              min="0"
-              max="10"
-              name="rate_param"
-            />
-          </span>
-          <!-- 1부터 10점 (별 3.5개면 7) -->
+    <div class="wrapper"> 
+      <div class="food">
+        <img src="images/chicken.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>닭강정</h3>
+          <p>삼삼돈까스</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ dakgangjung_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_dakgangjung }}개)</a>
+          <br />
+          <br />
+          <br />
+          <a href="/review/dakgangjung"><p>리뷰 작성</p></a>
         </div>
-        <br />
-        <a href="#">제품 리뷰 확인</br>({{ total_review_dakgangjung }}개)</a>
-        <br />
-        <br />
-        <br />
-        <a href="/review/burger"><p>리뷰 작성</p></a>
       </div>
-    </div>
 
-    <div class="food">
-      <img src="images/sushi.jpg" width="300" height="200" />
-      <div class="text">
-        <h3>초밥</h3>
-        <p>만권화밥</p>
-        <p>0000원</p>
-        <div class="rating">
-          <span class="star">
-            ★★★★★
-            <span style="width: {{ sushi_review }}%">★★★★★</span>
-            <input
-              id="star_rate"
-              type="range"
-              value="1"
-              step="1"
-              min="0"
-              max="10"
-              name="rate_param"
-            />
-          </span>
-          <!-- 1부터 10점 (별 3.5개면 7) -->
+      <div class="food">
+        <img src="images/burger.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>햄버거</h3>
+          <p>BAGUETTE BURGER</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ burger_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_burger }}개)</a>
+          <br />
+          <br />
+          <br />
+          <br />
+          <a href="/review/burger"><p>리뷰 작성</p></a>
         </div>
-        <br />
-        <a href="#">제품 리뷰 확인</br>({{ total_review_sushi }}개)</a>
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href="/review/sushi"><p>리뷰 작성</p></a>
       </div>
-    </div>
 
-    <div class="food">
-      <img src="images/burger.jpg" width="300" height="200" />
-      <div class="text">
-        <h3>햄버거</h3>
-        <p>BAGUETTE BURGER</p>
-        <p>0000원</p>
-        <div class="rating">
-          <span class="star">
-            ★★★★★
-            <span style="width: {{ burger_review }}%">★★★★★</span>
-            <input
-              id="star_rate"
-              type="range"
-              value="1"
-              step="1"
-              min="0"
-              max="10"
-              name="rate_param"
-            />
-          </span>
-          <!-- 1부터 10점 (별 3.5개면 7) -->
+      <div class="food">
+        <img src="images/sushi.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>스시</h3>
+          <p>밀양덮밥</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ sushi_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_sushi }}개)</a>
+          <br />
+          <br />
+          <br />
+          <br />
+          <a href="/review/sushi"><p>리뷰 작성</p></a>
         </div>
-        <br />
-        <a href="#">제품 리뷰 확인</br>({{ total_review_burger }}개)</a>
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href="/review/burger"><p>리뷰 작성</p></a>
       </div>
-    </div>
-    <div class="food">
-      <img src="images/bibimbap.jpg" width="300" height="200" />
-      <div class="text">
-        <h3>스시</h3>
-        <p>밀양덮밥</p>
-        <p>0000원</p>
-        <div class="rating">
-          <span class="star">
-            ★★★★★
-            <span style="width: {{ sushi_review }}%">★★★★★</span>
-            <input
-              id="star_rate"
-              type="range"
-              value="1"
-              step="1"
-              min="0"
-              max="10"
-              name="rate_param"
-            />
-          </span>
-          <!-- 1부터 10점 (별 3.5개면 7) -->
+
+      <div class="food">
+        <img src="images/ramyeon.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>라면</h3>
+          <p>분식</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ ramen_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_ramen }}개)</a>
+          <br />
+          <br />
+          <br />
+          <br />
+          <a href="/review/ramen"><p>리뷰 작성</p></a>
         </div>
-        <br />
-        <a href="#">제품 리뷰 확인</br>({{ total_review_sushi }}개)</a>
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href="/review/burger"><p>리뷰 작성</p></a>
       </div>
-    </div>
+
+      <div class="food">
+        <img src="images/tteokbokki.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>떡볶이</h3>
+          <p>분식</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ tteokbokki_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_tteokbokki }}개)</a>
+          <br />
+          <br />
+          <br />
+          <br />
+          <a href="/review/tteokbokki"><p>리뷰 작성</p></a>
+        </div>
+      </div>
+
+      <div class="food">
+        <img src="images/udon_bg.jpg" width="300" height="200" />
+        <div class="text">
+          <h3>우동</h3>
+          <p>분식</p>
+          <p>0000원</p>
+          <div class="rating">
+            <span class="star">
+              ★★★★★
+              <span style="width: {{ udon_review }}%">★★★★★</span>
+              <input
+                id="star_rate"
+                type="range"
+                value="1"
+                step="1"
+                min="0"
+                max="10"
+                name="rate_param"
+              />
+            </span>
+            <!-- 1부터 10점 (별 3.5개면 7) -->
+          </div>
+          <br />
+          <a href="#">제품 리뷰 확인</br>({{ total_review_udon }}개)</a>
+          <br />
+          <br />
+          <br />
+          <br />
+          <a href="/review/udon"><p>리뷰 작성</p></a>
+        </div>
+      </div>
+    </div>  <!-- Grid -->
     <br />
     <br />
     <br />

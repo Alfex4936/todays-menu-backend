@@ -14,6 +14,10 @@ lazy_static! {
         let mut m = HashMap::new();
         m.insert("sushi", "스시");
         m.insert("burger", "햄버거");
+        m.insert("dakgangjung", "햄버거");
+        m.insert("ramen", "라면");
+        m.insert("tteokbokki", "떡볶이");
+        m.insert("udon", "우동");
         m
     };
 }
