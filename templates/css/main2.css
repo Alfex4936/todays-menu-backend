@@ -115,7 +115,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)),
-    url("https://res.cloudinary.com/dokf7npvg/image/upload/v1540355245/0jbUKoX.jpg");
+    url(../images/ajou_food_bg.jpg);
   background-position: center;
   background-size: cover;
 }

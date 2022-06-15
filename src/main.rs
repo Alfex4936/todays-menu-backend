@@ -127,7 +127,7 @@ async fn sign_fav_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
-#[get("/menu2.html")]
+#[get("/menu_new.html")]
 async fn menu_html(
     tera: web::Data<Mutex<Tera>>,
     data: web::Data<Mutex<GlobalState>>,
@@ -149,7 +149,7 @@ async fn menu_html(
         );
     }
 
-    let rendered = tera.render("menu2.html", &ctx).unwrap();
+    let rendered = tera.render("menu_new.html", &ctx).unwrap();
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
