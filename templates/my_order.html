@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>오늘의 메뉴</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/burger.css" />
+    <link rel="stylesheet" href="css/my_order.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <script src="js/jquery.slim.js"></script>
+  </head>
+  <body>
+    <div id="sidebar">
+      <ul class="menu">
+        <li class="menu-global menu-top" onclick="window.location.href = '/';">
+          <span class="menu-text">로그아웃</span>
+        </li>
+        <li
+          class="menu-global menu-middle"
+          onclick="window.location.href = '/recommend.html';"
+        >
+          <span class="menu-text">추천 메뉴</span>
+        </li>
+        <li
+          class="menu-global menu-bottom"
+          onclick="window.location.href = '/history';"
+        >
+          <span class="menu-text">주문 내역</span>
+        </li>
+        <li
+          class="menu-global menu-hidden"
+          onclick="window.location.href = '/menu_new.html';"
+        >
+          <span class="menu-text">메뉴판 보기</span>
+        </li>
+        <div class="menu-close fa fa-close fa-3x"></div>
+        <div class="click-blocker"></div>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="printer-top"></div>
+
+      <div class="paper-container">
+        <div class="printer-bottom"></div>
+
+        <div class="paper">
+          <div class="main-contents">
+            <div class="success-icon">&#10004;</div>
+            <div class="success-title">내 주문 번호</div>
+            <div class="success-description">상태: {{ order_status }}</div>
+            <div class="order-details">
+              <div class="order-number-label">주문 번호</div>
+              <div class="order-number">152</div>
+            </div>
+            <div class="order-footer">감사합니다!</div>
+          </div>
+          <!-- <div class="jagged-edge"></div> -->
+        </div>
+      </div>
+    </div>
+    <script src="js/burger.js"></script>
+  </body>
+</html>

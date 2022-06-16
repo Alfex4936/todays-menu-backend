@@ -4,10 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/burger.css" />
     <link rel="stylesheet" href="/css/reviewpage.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <script src="js/jquery.slim.js"></script>
     <title>사용자 리뷰 목록</title>
   </head>
   <body>
+    <div id="sidebar">
+      <ul class="menu">
+        <li class="menu-global menu-top" onclick="window.location.href = '/';">
+          <span class="menu-text">로그아웃</span>
+        </li>
+        <li
+          class="menu-global menu-middle"
+          onclick="window.location.href = '/recommend.html';"
+        >
+          <span class="menu-text">추천 메뉴</span>
+        </li>
+        <li
+          class="menu-global menu-bottom"
+          onclick="window.location.href = '/history';"
+        >
+          <span class="menu-text">주문 내역</span>
+        </li>
+
+        <div class="menu-close fa fa-close fa-3x"></div>
+        <div class="click-blocker"></div>
+      </ul>
+    </div>
     <header></header>
     <h1>{{ food_name }}<br />리뷰 모음</h1>
     <div class="rating score">
@@ -53,6 +81,7 @@
       </section>
     </main>
 
+    <script src="/js/burger.js"></script>
     <script src="/js/reviewpage.js"></script>
   </body>
 </html>

@@ -153,6 +153,23 @@ async fn menu_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
+#[get("/my_order.html")]
+async fn my_order_html(
+    tera: web::Data<Mutex<Tera>>,
+    data: web::Data<Mutex<GlobalState>>,
+) -> impl Responder {
+    let data = data.lock().unwrap();
+    let tera = tera.lock().unwrap();
+
+    let mut ctx = Context::new();
+
+    ctx.insert("name", data.name.clone().as_str());
+    ctx.insert("order_status", "주문 완료");
+
+    let rendered = tera.render("my_order.html", &ctx).unwrap();
+    HttpResponse::Ok().content_type("text/html").body(rendered)
+}
+
 #[get("/signup.html")]
 async fn signup_html(
     tera: web::Data<Mutex<Tera>>,
@@ -267,6 +284,7 @@ async fn main() -> std::io::Result<()> {
             .service(signup_html)
             .service(menu_html)
             .service(recommend_html)
+            .service(my_order_html)
             .service(backend::review::review_html)
             .service(backend::review::post_review)
             .service(post_login)
