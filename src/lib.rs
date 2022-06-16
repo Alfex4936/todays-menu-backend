@@ -357,6 +357,10 @@ impl GlobalState {
         self.orders.get(&food).unwrap().order_number
     }
 
+    pub fn get_order_status_by_food(&self, food: String) -> u8 {
+        self.orders.get(&food).unwrap().status
+    }
+
     pub fn get_name(&self, name: &str) -> bool {
         if self.name.eq(name) {
             true
@@ -405,6 +409,10 @@ impl GlobalState {
 
     pub fn get_total_review_counts(&self, food: String) -> usize {
         self.reviews.get(&food).unwrap().borrow().len()
+    }
+
+    pub fn set_order_status(&mut self, food: String, number: u8) {
+        self.orders.get_mut(&food).unwrap().status = number
     }
 }
 

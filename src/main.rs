@@ -267,6 +267,7 @@ async fn main() -> std::io::Result<()> {
             .service(recommend_html)
             .service(backend::order::my_order_html)
             .service(backend::order::get_order_food)
+            .service(backend::order::update_food_order_status)
             .service(backend::review::review_html)
             .service(backend::review::review_write_html)
             .service(backend::review::post_review)
