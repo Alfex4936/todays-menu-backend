@@ -13,7 +13,29 @@ pub use routes::review;
 use lazy_static::lazy_static;
 
 lazy_static! {
-    static ref REVIEW_NAMES: Vec<&'static str> = {
+    pub static ref FOOD_KOREAN: HashMap<&'static str, &'static str> = {
+        let mut m = HashMap::new();
+        m.insert("burger", "햄버거");
+        m.insert("mayak", "마약계란덮밥");
+        m.insert("momil", "냉모밀");
+        m.insert("ramen", "라면");
+        m.insert("tteokbokki", "떡볶이");
+        m.insert("udon", "우동");
+        m
+    };
+
+    pub static ref ALL_MENU: HashMap<&'static str, &'static str> = {
+        let mut m: HashMap<&'static str, &'static str> = HashMap::new();
+        m.insert("햄버거", "burger");
+        m.insert("마약계란덮밥", "mayak");
+        m.insert("냉모밀", "momil");
+        m.insert("라면", "ramen");
+        m.insert("떡볶이", "tteokbokki");
+        m.insert("우동", "udon");
+        m
+    };
+
+    pub static ref REVIEW_NAMES: Vec<&'static str> = {
         // https://nickname.hwanmoo.kr/?format=json&count=50
         let m: Vec<&'static str> = vec![
             "젓가락질이 서툰 미스터초밥왕",

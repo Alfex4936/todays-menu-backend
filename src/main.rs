@@ -6,28 +6,26 @@ use actix_web_static_files::ResourceFiles;
 
 use std::sync::Mutex;
 
-use backend::{redirect_to, GlobalState};
-use lazy_static::lazy_static;
-use rand::seq::SliceRandom;
+use backend::{redirect_to, GlobalState, ALL_MENU, FOOD_KOREAN, REVIEW_NAMES};
+use fake::Fake;
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use tera::{Context, Tera};
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
-lazy_static! {
-    static ref ALL_MENU: HashMap<&'static str, &'static str> = {
-        let mut m: HashMap<&'static str, &'static str> = HashMap::new();
-        m.insert("햄버거", "burger");
-        m.insert("마약계란덮밥", "mayak");
-        m.insert("냉모밀", "momil");
-        m.insert("라면", "ramen");
-        m.insert("떡볶이", "tteokbokki");
-        m.insert("우동", "udon");
-        m
-    };
-}
+// lazy_static! {
+//     static ref ALL_MENU: HashMap<&'static str, &'static str> = {
+//         let mut m: HashMap<&'static str, &'static str> = HashMap::new();
+//         m.insert("햄버거", "burger");
+//         m.insert("마약계란덮밥", "mayak");
+//         m.insert("냉모밀", "momil");
+//         m.insert("라면", "ramen");
+//         m.insert("떡볶이", "tteokbokki");
+//         m.insert("우동", "udon");
+//         m
+//     };
+// }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Food {
@@ -153,17 +151,21 @@ async fn menu_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
-#[get("/my_order.html")]
+#[get("/my_order/{food}")]
 async fn my_order_html(
     tera: web::Data<Mutex<Tera>>,
     data: web::Data<Mutex<GlobalState>>,
+    food: web::Path<String>,
 ) -> impl Responder {
     let data = data.lock().unwrap();
     let tera = tera.lock().unwrap();
+    let food_name = food.into_inner();
 
     let mut ctx = Context::new();
 
     ctx.insert("name", data.name.clone().as_str());
+    ctx.insert("food_name", FOOD_KOREAN.get(food_name.as_str()).unwrap());
+    ctx.insert("order_number", &(100..999).fake::<i32>());
     ctx.insert("order_status", "주문 완료");
 
     let rendered = tera.render("my_order.html", &ctx).unwrap();

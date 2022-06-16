@@ -1,26 +1,11 @@
 #![allow(proc_macro_derive_resolution_fallback)]
 
 use actix_web::{get, post, web, HttpResponse, Responder};
-use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::sync::Mutex;
 use tera::{Context, Tera};
 
-use crate::{redirect_to, GlobalState};
-
-lazy_static! {
-    static ref FOOD_KOREAN: HashMap<&'static str, &'static str> = {
-        let mut m = HashMap::new();
-        m.insert("burger", "햄버거");
-        m.insert("mayak", "마약계란덮밥");
-        m.insert("momil", "냉모밀");
-        m.insert("ramen", "라면");
-        m.insert("tteokbokki", "떡볶이");
-        m.insert("udon", "우동");
-        m
-    };
-}
+use crate::{redirect_to, GlobalState, FOOD_KOREAN};
 
 #[derive(Serialize, Deserialize)]
 pub struct ReviewParam {
