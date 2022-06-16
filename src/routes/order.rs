@@ -3,9 +3,36 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use std::sync::Mutex;
 
 use crate::{redirect_to, GlobalState, ALL_MENU, FOOD_KOREAN, REVIEW_NAMES};
+use chrono::prelude::*;
 use fake::Fake;
 use serde::{Deserialize, Serialize};
 use tera::{Context, Tera};
+
+trait Korean {
+    fn kweek(&self) -> String;
+    fn kday(&self) -> String;
+}
+
+impl Korean for chrono::DateTime<chrono::Local> {
+    fn kweek(&self) -> String {
+        match self.weekday() {
+            Weekday::Mon => return "월요일".to_string(),
+            Weekday::Tue => return "화요일".to_string(),
+            Weekday::Wed => return "수요일".to_string(),
+            Weekday::Thu => return "목요일".to_string(),
+            Weekday::Fri => return "금요일".to_string(),
+            Weekday::Sat => return "토요일".to_string(),
+            Weekday::Sun => return "일요일".to_string(),
+        };
+    }
+
+    fn kday(&self) -> String {
+        match self.hour() {
+            h if h > 12 => return "오후".to_string(),
+            _ => return "오전".to_string(),
+        };
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct Order {
@@ -40,10 +67,16 @@ async fn my_order_html(
     let food_name = food.into_inner();
     let food_name_kor = FOOD_KOREAN.get(food_name.as_str()).unwrap();
 
+    let current = Local::now();
+
     let mut ctx = Context::new();
 
     ctx.insert("name", data.name.clone().as_str());
     ctx.insert("food_name", food_name_kor);
+    ctx.insert(
+        "time",
+        &format!("2022-06-17 {}{}", current.kday(), current.format("%-I:%M")),
+    );
 
     ctx.insert(
         "order_number",

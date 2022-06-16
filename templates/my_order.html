@@ -25,7 +25,7 @@
         </li>
         <li
           class="menu-global menu-bottom"
-          onclick="window.location.href = '/history';"
+          onclick="window.location.href = '/history.html';"
         >
           <span class="menu-text">주문 내역</span>
         </li>
@@ -58,7 +58,7 @@
               <div class="order-number-label">주문 번호</div>
               <div class="order-number">{{ order_number }}</div>
             </div>
-            <div class="order-footer">{{ name }}님 감사합니다!</div>
+            <div class="order-footer">주문 시각: {{ time }}</br></br>{{ name }}님 감사합니다!</div>
           </div>
         </div>
       </div>

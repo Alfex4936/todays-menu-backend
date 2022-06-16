@@ -125,6 +125,23 @@ async fn sign_fav_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
+#[get("/history.html")]
+async fn history_html(
+    tera: web::Data<Mutex<Tera>>,
+    data: web::Data<Mutex<GlobalState>>,
+) -> impl Responder {
+    let data = data.lock().unwrap();
+
+    let mut ctx = Context::new();
+    ctx.insert("name", data.name.clone().as_str());
+    ctx.insert("histories", &data.get_all_history());
+
+    let tera = tera.lock().unwrap();
+    let rendered = tera.render("history.html", &ctx).unwrap();
+
+    HttpResponse::Ok().content_type("text/html").body(rendered)
+}
+
 #[get("/menu_new.html")]
 async fn menu_html(
     tera: web::Data<Mutex<Tera>>,
@@ -265,6 +282,7 @@ async fn main() -> std::io::Result<()> {
             .service(signup_html)
             .service(menu_html)
             .service(recommend_html)
+            .service(history_html)
             .service(backend::order::my_order_html)
             .service(backend::order::get_order_food)
             .service(backend::order::update_food_order_status)

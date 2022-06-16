@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘의 메뉴 - 주문 기록</title>
+    <link rel="stylesheet" href="css/burger.css" />
+    <link rel="stylesheet" href="css/history.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <script src="js/jquery.slim.js"></script>
+  </head>
+  <body>
+    <div id="sidebar">
+      <ul class="menu">
+        <li class="menu-global menu-top" onclick="window.location.href = '/';">
+          <span class="menu-text">로그아웃</span>
+        </li>
+        <li
+          class="menu-global menu-middle"
+          onclick="window.location.href = '/recommend.html';"
+        >
+          <span class="menu-text">추천 메뉴</span>
+        </li>
+        <li
+          class="menu-global menu-bottom"
+          onclick="window.location.href = '/menu_new.html';"
+        >
+          <span class="menu-text">메뉴판 보기</span>
+        </li>
+        <!-- <li class="menu-global menu-hidden">
+          <span class="menu-text">테스트</span>
+        </li> -->
+        <div class="menu-close fa fa-close fa-3x"></div>
+        <div class="click-blocker"></div>
+      </ul>
+    </div>
+
+    <section class="timeline">
+      <ul>
+        {% for history in histories %}
+        <li>
+          <div>
+            <time>{{ history.order_date }}</time>
+            <div class="discovery">
+              <h1>주문 메뉴: {{ history.menu_name }}</h1>
+              <p>주문 번호: {{ history.order_number }}</p>
+            </div>
+          </div>
+        </li>
+        {% else %}
+        <li>
+          <div>
+            <time>NOW</time>
+            <div class="discovery">
+              <h1>당장 주문하세요!</h1>
+              <p>많이 채워보세요 ;)</p>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <script src="js/burger.js"></script>
+    <script src="js/history.js"></script>
+  </body>
+</html>

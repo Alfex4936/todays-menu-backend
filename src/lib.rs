@@ -12,6 +12,35 @@ pub use routes::order;
 pub use routes::review;
 
 // Global
+use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
+
+trait Korean {
+    fn kweek(&self) -> String;
+    fn kday(&self) -> String;
+}
+
+impl Korean for chrono::DateTime<chrono::Local> {
+    fn kweek(&self) -> String {
+        match self.weekday() {
+            Weekday::Mon => return "월요일".to_string(),
+            Weekday::Tue => return "화요일".to_string(),
+            Weekday::Wed => return "수요일".to_string(),
+            Weekday::Thu => return "목요일".to_string(),
+            Weekday::Fri => return "금요일".to_string(),
+            Weekday::Sat => return "토요일".to_string(),
+            Weekday::Sun => return "일요일".to_string(),
+        };
+    }
+
+    fn kday(&self) -> String {
+        match self.hour() {
+            h if h > 12 => return "오후".to_string(),
+            _ => return "오전".to_string(),
+        };
+    }
+}
+
 use lazy_static::lazy_static;
 
 lazy_static! {
@@ -183,6 +212,13 @@ use std::collections::HashMap;
 
 use fake::Fake;
 
+#[derive(Serialize, Deserialize, Debug, Default)]
+pub struct History {
+    pub menu_name: String,
+    pub order_date: String,
+    pub order_number: i32,
+}
+
 #[derive(Debug, Default)]
 pub struct GlobalState {
     pub name: String,     // 유저 네임
@@ -190,6 +226,7 @@ pub struct GlobalState {
     pub email: String,    // 이메일
     pub reviews: HashMap<String, RefCell<Vec<Review>>>,
     pub orders: HashMap<String, Order>,
+    pub history: RefCell<Vec<History>>,
 }
 
 impl GlobalState {
@@ -347,6 +384,14 @@ impl GlobalState {
 
         self.orders.get_mut(&food).unwrap().order_number = number;
         self.orders.get_mut(&food.to_owned()).unwrap().order_food = food.to_owned();
+
+        let current = Local::now();
+        let msg = format!("2022-06-17 {}{}", current.kday(), current.format("%-I:%M"));
+        self.history.borrow_mut().push(History {
+            menu_name: food.to_owned(),
+            order_number: number,
+            order_date: msg,
+        });
         // self.orders.get_mut(&food).unwrap().set_order_number(number);
         // self.orders.get_mut(&food).unwrap().set_order_food(food);
 
@@ -409,6 +454,20 @@ impl GlobalState {
 
     pub fn get_total_review_counts(&self, food: String) -> usize {
         self.reviews.get(&food).unwrap().borrow().len()
+    }
+
+    pub fn get_all_history(&self) -> Vec<History> {
+        let array = self.history.borrow();
+        let mut histories = vec![];
+        for history in array.iter() {
+            histories.push(History {
+                menu_name: history.menu_name.to_owned(),
+                order_number: history.order_number,
+                order_date: history.order_date.to_owned(),
+            });
+        }
+
+        histories
     }
 
     pub fn set_order_status(&mut self, food: String, number: u8) {
