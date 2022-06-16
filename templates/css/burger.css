@@ -61,6 +61,7 @@ ul {
   -webkit-transition: all 0.2s 0s;
   transition: all 0.2s 0s;
   z-index: 1000;
+  box-shadow: rgb(0 0 0 / 90%) 0px 22px 70px 4px;
 }
 .menu-top {
   top: 0;
