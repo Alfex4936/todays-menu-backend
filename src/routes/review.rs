@@ -63,6 +63,17 @@ async fn review_html(
     ctx.insert("food_name", FOOD_KOREAN.get(food_name.as_str()).unwrap());
     ctx.insert("reviews", &reviews);
 
+    ctx.insert(
+        "total_review_count",
+        &data.get_total_review_counts(FOOD_KOREAN.get(food_name.as_str()).unwrap().to_string()),
+    );
+    ctx.insert(
+        "total_star",
+        &data.get_review_rate_range(FOOD_KOREAN.get(food_name.as_str()).unwrap().to_string()),
+    );
+
+    // println!("{:?}", ctx);
+
     let tera = tera.lock().unwrap();
 
     let rendered = tera.render("reviewpage.html", &ctx).unwrap();

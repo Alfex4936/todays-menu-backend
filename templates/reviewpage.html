@@ -10,6 +10,22 @@
   <body>
     <header></header>
     <h1>{{ food_name }}<br />리뷰 모음</h1>
+    <div class="rating score">
+      <span class="star">
+        ★★★★★
+        <a style="color: black">({{ total_review_count }}개의 리뷰)</a>
+        <span style="width: {{ total_star }}em">★★★★★</span>
+        <input
+          id="star_rate"
+          type="range"
+          value="1"
+          step="1"
+          min="0"
+          max="10"
+          name="rate_param"
+        />
+      </span>
+    </div>
     <!-- TODO: right up down left rotateL rotateR scaleUp scaleDown 배열 섞기 -->
     <main>
       <section>
