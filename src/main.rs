@@ -151,27 +151,6 @@ async fn menu_html(
     HttpResponse::Ok().content_type("text/html").body(rendered)
 }
 
-#[get("/my_order/{food}")]
-async fn my_order_html(
-    tera: web::Data<Mutex<Tera>>,
-    data: web::Data<Mutex<GlobalState>>,
-    food: web::Path<String>,
-) -> impl Responder {
-    let data = data.lock().unwrap();
-    let tera = tera.lock().unwrap();
-    let food_name = food.into_inner();
-
-    let mut ctx = Context::new();
-
-    ctx.insert("name", data.name.clone().as_str());
-    ctx.insert("food_name", FOOD_KOREAN.get(food_name.as_str()).unwrap());
-    ctx.insert("order_number", &(100..999).fake::<i32>());
-    ctx.insert("order_status", "주문 완료");
-
-    let rendered = tera.render("my_order.html", &ctx).unwrap();
-    HttpResponse::Ok().content_type("text/html").body(rendered)
-}
-
 #[get("/signup.html")]
 async fn signup_html(
     tera: web::Data<Mutex<Tera>>,
@@ -286,8 +265,10 @@ async fn main() -> std::io::Result<()> {
             .service(signup_html)
             .service(menu_html)
             .service(recommend_html)
-            .service(my_order_html)
+            .service(backend::order::my_order_html)
+            .service(backend::order::get_order_food)
             .service(backend::review::review_html)
+            .service(backend::review::review_write_html)
             .service(backend::review::post_review)
             .service(post_login)
             .service(post_signup)

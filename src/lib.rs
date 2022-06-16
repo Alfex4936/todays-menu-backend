@@ -6,7 +6,9 @@ pub const SERVER: &str = "0.0.0.0:8010";
 
 mod routes;
 
+use order::Order;
 use review::Review;
+pub use routes::order;
 pub use routes::review;
 
 // Global
@@ -187,6 +189,7 @@ pub struct GlobalState {
     pub password: String, // 유저 비번
     pub email: String,    // 이메일
     pub reviews: HashMap<String, RefCell<Vec<Review>>>,
+    pub orders: HashMap<String, Order>,
 }
 
 impl GlobalState {
@@ -199,9 +202,18 @@ impl GlobalState {
         m.insert("떡볶이".to_string(), RefCell::new(Vec::new()));
         m.insert("우동".to_string(), RefCell::new(Vec::new()));
 
+        let mut orders: HashMap<String, Order> = HashMap::new();
+        orders.insert("햄버거".to_string(), Order::new());
+        orders.insert("냉모밀".to_string(), Order::new());
+        orders.insert("마약계란덮밥".to_string(), Order::new());
+        orders.insert("라면".to_string(), Order::new());
+        orders.insert("떡볶이".to_string(), Order::new());
+        orders.insert("우동".to_string(), Order::new());
+
         GlobalState {
             name: "ajounice".to_string(),
             reviews: m,
+            orders: orders,
             ..Default::default()
         }
     }
@@ -320,6 +332,29 @@ impl GlobalState {
         // review.rate = rate;
 
         self.reviews.get(&food).unwrap().borrow_mut().push(review);
+    }
+
+    pub fn add_order(&mut self, food: String, number: i32) -> bool {
+        // let mut review = Review::new();
+        // review.writer = user_name.to_owned();
+        // review.review_txt = review_txt.to_owned();
+        // review.rate = rate;
+
+        let order = self.orders.get_mut(&food).unwrap();
+        if order.order_number != 0 {
+            return false;
+        }
+
+        self.orders.get_mut(&food).unwrap().order_number = number;
+        self.orders.get_mut(&food.to_owned()).unwrap().order_food = food.to_owned();
+        // self.orders.get_mut(&food).unwrap().set_order_number(number);
+        // self.orders.get_mut(&food).unwrap().set_order_food(food);
+
+        true
+    }
+
+    pub fn get_order_number_by_food(&self, food: String) -> i32 {
+        self.orders.get(&food).unwrap().order_number
     }
 
     pub fn get_name(&self, name: &str) -> bool {
