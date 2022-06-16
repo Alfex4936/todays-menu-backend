@@ -2,18 +2,28 @@
 extern crate serde_derive;
 extern crate serde_json;
 
+#[macro_use]
+extern crate lazy_static_include;
+
 pub const SERVER: &str = "0.0.0.0:8010";
 
 mod routes;
 
 use order::Order;
 use review::Review;
+pub use routes::menu;
 pub use routes::order;
 pub use routes::review;
+pub use routes::user;
 
 // Global
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
+
+lazy_static_include_array! {
+    /// 나쁜 말
+    pub FWORD: [&'static str; 588] => "templates/fword_list.txt"
+}
 
 trait Korean {
     fn kweek(&self) -> String;
