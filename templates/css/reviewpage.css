@@ -52,11 +52,13 @@ section .review.review-down {
 }
 
 section .review.review-left {
-  background-color: #aaff00;
+  background-color: #a5d6a7;
   width: auto;
   height: auto;
   border-radius: 20px;
   margin: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 section .review.review-right {

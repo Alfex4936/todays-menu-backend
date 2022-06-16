@@ -22,7 +22,6 @@ rust-embed="6.4.0"
 mime_guess = { version = "2" }
 
 lazy_static = "1.4.0"
-lazy-static-include = "3.1.2"
 
 fake = { version = "2.4", features = ["derive"] }
 rand = "0.8"
@@ -33,4 +32,3 @@ static-files = "0.2.1"
 
 [build-dependencies]
 static-files = "0.2.1"
-mml = "0.1.41"

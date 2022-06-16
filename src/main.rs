@@ -8,6 +8,8 @@ use std::sync::Mutex;
 
 use backend::{redirect_to, GlobalState, ALL_MENU, FOOD_KOREAN, REVIEW_NAMES};
 use fake::Fake;
+use rand::seq::SliceRandom;
+use rand::thread_rng;
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use tera::{Context, Tera};
@@ -71,9 +73,9 @@ async fn recommend_html(
         ..Default::default()
     });
     foods.push(Food {
-        name: "덮밥".to_string(),
+        name: "마약계란덮밥".to_string(),
         desc: "밥 위에 고기, 야채, 소스 등을 넣고 같이 섞어 먹는 요리의 일종이다.".to_string(),
-        picture_url: "images/dupbap.png".to_string(),
+        picture_url: "images/마약계란덮밥.png".to_string(),
         ..Default::default()
     });
     foods.push(Food {
@@ -82,28 +84,29 @@ async fn recommend_html(
         picture_url: "images/udon.png".to_string(),
         ..Default::default()
     });
-    // foods.push(Food {
-    //     name: "햄버거".to_string(),
-    //     desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
-    //     picture_url: "images/hamburger.png".to_string(),
-    //     ..Default::default()
-    // });
-    // foods.push(Food {
-    //     name: "햄버거".to_string(),
-    //     desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
-    //     picture_url: "images/hamburger.png".to_string(),
-    //     ..Default::default()
-    // });
+    foods.push(Food {
+        name: "햄버거".to_string(),
+        desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
+        picture_url: "images/hamburger.png".to_string(),
+        ..Default::default()
+    });
+    foods.push(Food {
+        name: "냉모밀".to_string(),
+        desc: "익힌 메밀국수를 차갑게 헹궈서 물기를 뺀 다음 가쓰오부시 장국에 찍어 먹는 음식. 우리나라에서는 '모밀'이라고도 부른다.".to_string(),
+        picture_url: "images/냉모밀+새우튀김.png".to_string(),
+        ..Default::default()
+    });
 
-    // let sample: Vec<_> = foods
-    //     .choose_multiple(&mut rand::thread_rng(), 5)
-    //     .collect();
+    let mut rng = thread_rng();
+    foods.shuffle(&mut rng);
+
+    let sample: Vec<_> = foods.choose_multiple(&mut rand::thread_rng(), 5).collect();
 
     let tera = tera.lock().unwrap();
 
     let mut context = Context::new();
     context.insert("name", data.name.clone().as_str());
-    context.insert("foods", &foods);
+    context.insert("foods", &sample);
 
     let rendered = tera.render("recommend.html", &context).unwrap();
     HttpResponse::Ok().content_type("text/html").body(rendered)

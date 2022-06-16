@@ -3,92 +3,145 @@
   <head>
     <title>오늘의 메뉴</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/sign_favorite.css" />
+    <link rel="stylesheet" href="css/sign_favorite2.css" />
+    <script src="js/jquery.slim.js"></script>
   </head>
   <body>
-    <h1 id="per">오늘의 메뉴</h1>
-    <h2 id="pretty">{{ name }}님 어서오세요.</h2>
-    <h2 id="pretty">선호 메뉴를 고르세요.</h2>
+    <div style="text-align: center">
+      <h1 id="per">오늘의 메뉴</h1>
+      <h2 style="color: white">{{ name }}님 어서오세요.</h2>
+    </div>
+    <div class="rb-box">
+      <p>1. 선호하는 음식 종류</p>
+      <div id="rb-1" class="rb">
+        <div class="rb-tab" data-value="1">
+          <div class="rb-spot">
+            <span class="rb-txt">분식</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="2">
+          <div class="rb-spot">
+            <span class="rb-txt">햄버거</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="3">
+          <div class="rb-spot">
+            <span class="rb-txt">일식</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="4">
+          <div class="rb-spot">
+            <span class="rb-txt">한식</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="5">
+          <div class="rb-spot">
+            <span class="rb-txt">국밥/냉면</span>
+          </div>
+        </div>
+      </div>
 
-    <h3>선호하는 음식</h3>
-    <label>분식<input type="checkbox" name="food" value="1" /></label>
-    <label>햄버거<input type="checkbox" name="food" value="2" /></label>
-    <label>일식<input type="checkbox" name="food" value="3" /></label>
-    <label>한식<input type="checkbox" name="food" value="4" /></label>
-    <label>국밥/냉면<input type="checkbox" name="food" value="5" /></label>
-    <br />
-    <br />
-    <input type="button" id="foodSelectAllBtn" value="모두 선택" />
-    <input type="button" id="foodUnSelectAllBtn" value="모두 해제" />
-    <br />
-    <br />
-    <br />
+      <p>2. 좋아하는 맵기 단계</p>
+      <div id="rb-5" class="rb">
+        <div class="rb-tab" data-value="1">
+          <div class="rb-spot">
+            <span class="rb-txt">맵찔이</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="2">
+          <div class="rb-spot">
+            <span class="rb-txt">순한</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="3">
+          <div class="rb-spot">
+            <span class="rb-txt">보통</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="4">
+          <div class="rb-spot">
+            <span class="rb-txt">매운</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="5">
+          <div class="rb-spot">
+            <span class="rb-txt">많이 매운</span>
+          </div>
+        </div>
+      </div>
 
-    <h3>맵기단계 선택</h3>
-    <label>애기수준<input type="checkbox" name="spicy" value="1" /></label>
-    <label>순한맛<input type="checkbox" name="spicy" value="2" /></label>
-    <label>보통맛<input type="checkbox" name="spicy" value="3" /></label>
-    <label>매운맛<input type="checkbox" name="spicy" value="4" /></label>
-    <label>많이매운맛<input type="checkbox" name="spicy" value="5" /></label>
-    <br />
-    <br />
-    <input type="button" id="spicySelectAllBtn" value="모두 선택" />
-    <input type="button" id="spicyUnSelectAllBtn" value="모두 해제" />
-    <br />
-    <br />
-    <br />
+      <p>3. 선호 가격대</p>
+      <div id="rb-3" class="rb">
+        <div class="rb-tab" data-value="1">
+          <div class="rb-spot">
+            <span class="rb-txt">5,000원 이하</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="2">
+          <div class="rb-spot">
+            <span class="rb-txt">7,000원 이하</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="3">
+          <div class="rb-spot">
+            <span class="rb-txt">7,000원 초과</span>
+          </div>
+        </div>
+      </div>
 
-    <h3>선호하는 가격대</h3>
-    <label>5000원 이하<input type="checkbox" name="price" value="1" /></label>
-    <label>7000원 이하<input type="checkbox" name="price" value="2" /></label>
-    <label>7000원 초과<input type="checkbox" name="price" value="3" /></label>
-    <br />
-    <br />
-    <input type="button" id="priceSelectAllBtn" value="모두 선택" />
-    <input type="button" id="priceUnSelectAllBtn" value="모두 해제" />
-    <br />
-    <br />
-    <br />
+      <p>4. 채식 주의자?</p>
+      <div id="rb-2" class="rb">
+        <div class="rb-tab" data-value="1">
+          <div class="rb-spot">
+            <span class="rb-txt">네</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="2">
+          <div class="rb-spot">
+            <span class="rb-txt">아니오</span>
+          </div>
+        </div>
+      </div>
 
-    <h3>채식주의자입니까</h3>
-    <label>네<input type="checkbox" value="1" /></label>
-    <label>아니요<input type="checkbox" value="2" /></label>
-    <br />
-    <br />
-    <br />
+      <p>5. 알레르기 음식</p>
+      <div id="rb-8" class="rb">
+        <div class="rb-tab" data-value="1">
+          <div class="rb-spot">
+            <span class="rb-txt">유제품</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="2">
+          <div class="rb-spot">
+            <span class="rb-txt">견과류</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="3">
+          <div class="rb-spot">
+            <span class="rb-txt">생선</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="4">
+          <div class="rb-spot">
+            <span class="rb-txt">밤</span>
+          </div>
+        </div>
+        <div class="rb-tab" data-value="5">
+          <div class="rb-spot">
+            <span class="rb-txt">곡류</span>
+          </div>
+        </div>
+      </div>
 
-    <h3>알레르기 음식</h3>
-    <label>달걀<input type="checkbox" name="allergy" value="1" /></label>
-    <label>우유<input type="checkbox" name="allergy" value="2" /></label>
-    <label>밀<input type="checkbox" name="allergy" value="3" /></label>
-    <label>콩<input type="checkbox" name="allergy" value="4" /></label>
-    <label>땅콩<input type="checkbox" name="allergy" value="5" /></label>
-    <label>밤<input type="checkbox" name="allergy" value="6" /></label>
-    <label>생선<input type="checkbox" name="allergy" value="7" /></label>
-    <label>조개<input type="checkbox" name="allergy" value="8" /></label>
-    <br />
-    <br />
-    <input type="button" id="allergySelectAllBtn" value="모두 선택" />
-    <input type="button" id="allergyUnSelectAllBtn" value="모두 해제" />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <input
-      type="button"
-      class="client_enroll"
-      value="추천 메뉴 보기"
-      onclick="location.href='/recommend.html'"
-    />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <script src="js/sign_favorite.js"></script>
+      <!-- Button -->
+      <div class="button-box">
+        <button
+          class="button trigger"
+          onclick="location.href='/recommend.html'"
+        >
+          추천 메뉴 보기
+        </button>
+      </div>
+    </div>
+    <script src="js/sign_favorite2.js"></script>
   </body>
 </html>

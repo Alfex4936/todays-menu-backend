@@ -5,11 +5,12 @@ const drawStar = target => {
 };
 
 function filterTextarea() {
-  var pattern = /fox|dog/gi;
+  var pattern = /fuck|씨발|시발|ㅅㅣ발|shit|ㅈㄴ|존나|줜나|전나|쉽팔|18/gi;
   var textarea = document.getElementsByName("review_txt")[0];
   var matches = textarea.value.match(pattern);
 
   if (matches) {
+    alert("나쁜 말 금지!");
     textarea.value = "";
     return;
   }
