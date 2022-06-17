@@ -85,12 +85,6 @@ async fn recommend_html(
         ..Default::default()
     });
     foods.push(Food {
-        name: "햄버거".to_string(),
-        desc: "패티를 구운 후 다양한 부재료와 함께 빵 사이에 끼워 먹는 음식이다.".to_string(),
-        picture_url: "images/hamburger.png".to_string(),
-        ..Default::default()
-    });
-    foods.push(Food {
         name: "냉모밀".to_string(),
         desc: "익힌 메밀국수를 차갑게 헹궈서 물기를 뺀 다음 가쓰오부시 장국에 찍어 먹는 음식. 우리나라에서는 '모밀'이라고도 부른다.".to_string(),
         picture_url: "images/냉모밀+새우튀김.png".to_string(),
