@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
 use tera::{Context, Tera};
 
-use crate::{redirect_to, GlobalState, ALL_MENU, FOOD_KOREAN};
+use crate::{redirect_to, GlobalState};
 
 #[derive(Serialize, Deserialize)]
 pub struct UserParam {

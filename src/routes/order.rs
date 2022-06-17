@@ -1,8 +1,8 @@
 #![allow(proc_macro_derive_resolution_fallback)]
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, web, HttpResponse, Responder};
 use std::sync::Mutex;
 
-use crate::{redirect_to, GlobalState, ALL_MENU, FOOD_KOREAN, REVIEW_NAMES};
+use crate::{redirect_to, GlobalState, FOOD_KOREAN};
 use chrono::prelude::*;
 use fake::Fake;
 use serde::{Deserialize, Serialize};
